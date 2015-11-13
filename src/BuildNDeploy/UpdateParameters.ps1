@@ -2,7 +2,7 @@
 # UpdateParameters.ps1
 #
 
-Write-Host Get-Variable | Out-String
+Write-Host (Get-Variable | Out-String)
 
 $parameters = Get-ChildItem $Env:Release.EnvironmentUri -Recurse -Filter "SetParameters.xml"
 
