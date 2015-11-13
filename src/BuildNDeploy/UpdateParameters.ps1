@@ -6,7 +6,7 @@ $wd = $Env:System.DefaultWorkingDirectory
 
 $parameters = Get-ChildItem $wd -Recurse -Filter "*SetParameters.xml"
 
-Foreach($p in $parameters) {
+foreach($p in $parameters) {
 	
 	Write-Host Updating $p.FullName
 	
@@ -15,16 +15,18 @@ Foreach($p in $parameters) {
 
 	foreach($node in $xml.parameters.setParameter)
     {        
-        $value = Get-Variable $node.name -ValueOnly -ErrorAction SilentlyContinue
+        $varname = $node.name
+        $value = [Environment]::GetEnvironmentVariable($varname)
         if($value)
-        {
-            Write-Output ("Setting {0} with value {1}" -f $node.name, $value)
+        {            
+            Write-Output ("Setting {0} with value {1}" -f $varname, $value)
             $node.SetAttribute('value', $value)
         }
         else
         {
-            Write-Output ("No {0} variable found" -f $node.name)
+            Write-Output ("No {0} variable found" -f $varname)
         }
     }
+
     $xml.Save($p.FullName)
 }
