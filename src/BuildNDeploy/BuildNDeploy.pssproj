@@ -26,8 +26,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="DSC\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DSC\ApiServerConfiguration.ps1" />
     <Compile Include="UpdateParameters.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
