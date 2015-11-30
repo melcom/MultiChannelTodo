@@ -24,4 +24,4 @@ Configuration ApiServerConfiguration
   } 
 } 
 
-Configuration -Verbose
+ApiServerConfiguration -Verbose
