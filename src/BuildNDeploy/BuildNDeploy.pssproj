@@ -28,9 +28,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="DSC\" />
+    <Folder Include="DSC\WebPI\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSC\ApiServerConfiguration.ps1" />
+    <Compile Include="DSC\DscConfiguration.psd1" />
+    <Compile Include="DSC\WebPI\wpilauncher.exe" />
     <Compile Include="UpdateParameters.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
