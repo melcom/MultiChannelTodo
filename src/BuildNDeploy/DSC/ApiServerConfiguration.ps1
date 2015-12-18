@@ -23,11 +23,18 @@ Configuration ApiServerConfiguration
 		  Name = “Web-Server” 
 		} 
 
-		#Install ASP.NET 4.5 
+		#Install ASP.NET 4.5
 		WindowsFeature ASP 
 		{ 
 		  Ensure = “Present” 
 		  Name = “Web-Asp-Net45” 
+		} 
+		
+		#Install IIS Console
+		WindowsFeature ASP 
+		{ 
+		  Ensure = “Present” 
+		  Name = “Web-Mgmt-Tools” 
 		} 
 
         Package WebPi_Installation
