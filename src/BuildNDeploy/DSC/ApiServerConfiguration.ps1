@@ -31,7 +31,7 @@ Configuration ApiServerConfiguration
 		} 
 		
 		#Install IIS Console
-		WindowsFeature ASP 
+		WindowsFeature IISConsole 
 		{ 
 		  Ensure = “Present” 
 		  Name = “Web-Mgmt-Tools” 
