@@ -2,6 +2,16 @@
 # ApiServerConfiguration.ps1
 #
 
+$configData = @{
+    AllNodes = @( 
+        @{
+            NodeName = 'localhost'
+            WebPiSourcePath = "D:\dsc\dev\WebPi"
+            WebPiCmdPath = "$env:ProgramFiles\Microsoft\Web Platform Installer\WebPiCmd-x64.exe"
+        }
+    );
+}
+
 Configuration ApiServerConfiguration 
 {
 	Node $AllNodes.NodeName
@@ -41,8 +51,5 @@ Configuration ApiServerConfiguration
     } 
 } 
 
-#$DestPath = "D:\temp"
-#$configPath = Join-Path $DestPath "_configurations"
- 
-#ApiServerConfiguration -Verbose -OutputPath $configPath\DevToolsConfiguration -ConfigurationData .\DscConfiguration.psd1
-#Start-DscConfiguration -Path $configPath\DevToolsConfiguration -Wait -Verbose -Force
+ApiServerConfiguration -Verbose -OutputPath D:\dsc\dev -ConfigurationData $configData 
+Start-DscConfiguration -Path D:\dsc\dev -Wait -Verbose -Force
