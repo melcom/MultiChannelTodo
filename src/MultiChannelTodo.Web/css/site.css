@@ -1,8 +1,15 @@
-﻿.container {
-    width: 300px;
-    margin: auto;
+﻿.border {
     margin-top: 60px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px
+}
+
+.container {
+    width: 290px;
     padding: 10px;
+    background-color: #BBBBBB;
 }
 
 ul.check-list {
@@ -23,9 +30,9 @@ li.check-list-item {
     text-align: left;
 }
 
-    li.check-list-item span.glyphicon {
-        padding: 10px;
-    }
+li.check-list-item span.glyphicon {
+    padding: 10px;
+}
 
 div.controls-container {
     text-align: right;

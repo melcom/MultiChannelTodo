@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using MultiChannelToDo.Migrations;
+﻿using System.Data.Entity;
 
 namespace MultiChannelToDo.Models
 {
@@ -15,23 +10,11 @@ namespace MultiChannelToDo.Models
         // automatically whenever you change your model schema, please use data migrations.
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-    
+
         public MultiChannelToDoContext() : base("name=MultiChannelToDoContext")
         {
         }
 
-        public System.Data.Entity.DbSet<MultiChannelToDo.Models.TodoItem> ToDoItems { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.HasDefaultSchema("mobile_service_name"); // change schema to the name of your mobile service,
-                                                                  // replacing dashes with underscore
-                                                                  // mobile-service-name ==> mobile_service_name
-
-            Database.SetInitializer<MultiChannelToDoContext>(
-                new MigrateDatabaseToLatestVersion<MultiChannelToDoContext, Configuration>());
-
-            base.OnModelCreating(modelBuilder);
-        }
+        public DbSet<TodoItem> ToDoItems { get; set; }
     }
 }
