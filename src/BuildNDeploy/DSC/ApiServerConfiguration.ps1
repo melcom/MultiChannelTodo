@@ -2,11 +2,15 @@
 # ApiServerConfiguration.ps1
 #
 
+Param(
+	[string]$Folder
+)
+
 $configData = @{
     AllNodes = @( 
         @{
             NodeName = 'localhost'
-            WebPiSourcePath = "D:\dsc\dev\WebPi"
+            WebPiSourcePath = Join-Path $Folder "D:\dsc\dev\WebPi"
             WebPiCmdPath = "$env:ProgramFiles\Microsoft\Web Platform Installer\WebPiCmd-x64.exe"
         }
     );
@@ -58,5 +62,5 @@ Configuration ApiServerConfiguration
     } 
 } 
 
-ApiServerConfiguration -Verbose -OutputPath D:\dsc\dev -ConfigurationData $configData 
-Start-DscConfiguration -Path D:\dsc\dev -Wait -Verbose -Force
+ApiServerConfiguration -Verbose -OutputPath $Folder -ConfigurationData $configData 
+Start-DscConfiguration -Path $Folder -Wait -Verbose -Force
