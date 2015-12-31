@@ -10,7 +10,7 @@ $configData = @{
     AllNodes = @( 
         @{
             NodeName = 'localhost'
-            WebPiSourcePath = Join-Path $Folder "D:\dsc\dev\WebPi"
+            WebPiSourcePath = Join-Path $Folder "dsc\WebPi"
             WebPiCmdPath = "$env:ProgramFiles\Microsoft\Web Platform Installer\WebPiCmd-x64.exe"
         }
     );
