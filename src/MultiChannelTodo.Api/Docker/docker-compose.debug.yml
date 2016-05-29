@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  db:
+    image: phgache/mymongo:latest
+    volumes:
+      - "/var/data"
+    restart: always
+  multichanneltodo.api:
+    depends_on:
+      - db
+    image: multichanneltodo.api
+    links:
+      - db
+    build:
+      context: ..
+      dockerfile: Docker/Dockerfile.debug
+      args:
+      - CONTAINER_PORT=${MULTICHANNELTODO_API_PORT}
+      - SERVER_URLS=http://*:${MULTICHANNELTODO_API_PORT}
+    ports:
+    - "${HOST_PORT}:${MULTICHANNELTODO_API_PORT}"
+    volumes:
+    - ..:/app

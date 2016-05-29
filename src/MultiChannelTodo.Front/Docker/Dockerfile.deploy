@@ -1,0 +1,6 @@
+FROM microsoft/aspnet:1.0.0-rc1-update1
+
+ADD . /app
+WORKDIR /app
+
+ENTRYPOINT ["dnx", "-p", "/app/approot/src/MultiChannelTodo.Front/project.json", "web", "--server.urls", "http://0.0.0.0:5000"]

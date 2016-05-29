@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - MultiChannelTodo.Front</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+
+</head>
+<body>
+<div class="container body-content theme-showcase">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @RenderBody()
+        </div>
+        <div class="panel-footer">
+            <p>&copy; 2016 - MultiChannelTodo.Front</p>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/angular/angular.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/js/site.js"></script>
+
+@RenderSection("scripts", false)
+</body>
+</html>
