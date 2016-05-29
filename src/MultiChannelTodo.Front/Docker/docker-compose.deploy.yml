@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  multichanneltodo.front:
+    image: phgache/multichanneltodofront:latest
+    ports:
+    - "${HOST_PORT}:${MULTICHANNELTODO_FRONT_PORT}"
+    environment:
+      - DNX_apipath=${MULTICHANNELTODO_API_PATH}
+      - DNX_env=${MULTICHANNELTODO_ENV}

@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  multichanneltodo.front:
+    image: multichanneltodo.front
+    build:
+      context: ..
+      dockerfile: Docker/Dockerfile.release
+      args:
+      - CONTAINER_PORT=${MULTICHANNELTODO_FRONT_PORT}
+      - SERVER_URLS=http://*:${MULTICHANNELTODO_FRONT_PORT}
+    ports:
+    - "${HOST_PORT}:${MULTICHANNELTODO_FRONT_PORT}"
+    environment:
+      - DNX_apipath=http://docker:8080/api
+      - DNX_env=docker
