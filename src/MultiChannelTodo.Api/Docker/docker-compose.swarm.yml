@@ -1,0 +1,44 @@
+
+version: '2'
+
+services:
+  mongo:
+    name: mondodb
+    image: phgache/mymongo:latest
+    volumes:
+      - "/var/data"
+    restart: always
+    environment:
+      - "constraint:node!=consul0"
+    networks:
+      - back
+
+  multichanneltodo.api:
+    name: mtodoapi
+    image: phgache/multichanneltodoapi:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - "constraint:container!=~api*"
+      - "constraint:node!=consul0"
+    networks:
+      - front
+      - back
+
+  lb:
+    name: apilb
+    image: phgache\haproxy
+    ports:
+      - "8081:80"
+    environment:
+      - "APP_NAME=multichanneltodoapi"
+      - "CONSUL_URL=consul0.westeurope.cloudapp.azure.com:8500"
+      - "constraint:node==consul0"
+    networks:
+      - front
+
+networks:
+  front:
+    driver: overlay
+  back:
+    driver: overlay
