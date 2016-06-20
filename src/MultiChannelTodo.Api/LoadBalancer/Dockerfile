@@ -1,4 +1,4 @@
-﻿FROM debian:jessie
+FROM ubuntu:latest
 
 RUN apt-get update && apt-get install -y unzip libssl1.0.0 libpcre3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
 

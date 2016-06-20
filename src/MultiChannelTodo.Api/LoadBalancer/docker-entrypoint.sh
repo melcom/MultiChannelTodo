@@ -1,4 +1,4 @@
-﻿#!/bin/sh
+#!/bin/sh
 consul-template -consul=$CONSUL_URL -template="/templates/template.cfg:/usr/local/etc/haproxy/haproxy.cfg" -once
 
 # first arg is `-f` or `--some-option`
