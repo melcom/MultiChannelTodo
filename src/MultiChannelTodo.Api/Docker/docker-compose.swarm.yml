@@ -3,7 +3,6 @@ version: '2'
 
 services:
   mongo:
-    name: mondodb
     image: phgache/mymongo:latest
     volumes:
       - "/var/data"
@@ -14,7 +13,6 @@ services:
       - back
 
   multichanneltodo.api:
-    name: mtodoapi
     image: phgache/multichanneltodoapi:latest
     ports:
       - "5000:5000"
@@ -26,7 +24,6 @@ services:
       - back
 
   lb:
-    name: apilb
     image: phgache\haproxy
     ports:
       - "8081:80"
