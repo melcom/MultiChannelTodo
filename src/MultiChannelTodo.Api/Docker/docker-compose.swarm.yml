@@ -24,7 +24,7 @@ services:
       - back
 
   lb:
-    image: phgache\haproxy
+    image: phgache/haproxy:latest
     ports:
       - "8081:80"
     environment:
