@@ -31,6 +31,7 @@ ADD https://releases.hashicorp.com/consul-template/0.15.0/consul-template_0.15.0
 RUN unzip /usr/bin/consul-template_0.15.0_linux_amd64.zip -d /usr/local/bin
 ADD template.cfg /templates/template.cfg
 
+# Add entrypoint
 COPY docker-entrypoint.sh /
 RUN chmod 755 /docker-entrypoint.sh
 
