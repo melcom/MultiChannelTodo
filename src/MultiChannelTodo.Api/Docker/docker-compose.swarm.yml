@@ -23,7 +23,7 @@ services:
       - front
       - back
 
-  lb:
+  lbapi:
     image: phgache/haproxy:latest
     ports:
       - "8081:80"
