@@ -14,8 +14,8 @@ services:
 
   multichanneltodo.api:
     image: phgache/multichanneltodoapi:latest
-    ports:
-      - "5000:5000"
+    expose:
+      - "5000"
     environment:
       - "constraint:container!=~api*"
       - "constraint:node!=consul0"
