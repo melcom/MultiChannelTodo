@@ -4,10 +4,12 @@ services:
   multichanneltodo.front:
     image: phgache/multichanneltodofront:latest
     ports:
-    - "5000:5000"
+    - "5000:5001"
     environment:
       - DNX_apipath=${MULTICHANNELTODO_API_PATH}
       - DNX_env=${MULTICHANNELTODO_ENV}
+      - "constraint:container!=~front*"
+      - "constraint:node!=consul0"
     networks:
       - front
 
