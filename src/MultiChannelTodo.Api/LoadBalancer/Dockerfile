@@ -1,9 +1,11 @@
 FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y unzip libssl1.0.0 libpcre3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y unzip libssl1.0.0 libpcre3 --no-install-recommends
 
 # debug network tools
 RUN apt-get install -y curl net-tools inetutils-ping
+
+RUN rm -rf /var/lib/apt/lists/*
 
 ENV HAPROXY_MAJOR 1.6
 ENV HAPROXY_VERSION 1.6.5
