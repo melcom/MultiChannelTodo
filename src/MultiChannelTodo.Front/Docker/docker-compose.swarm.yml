@@ -16,10 +16,10 @@ services:
   lbfront:
     image: phgache/haproxy:latest
     ports:
-      - "8080:80"
+      - "${MULTICHANNELTODO_FRONT_PORT}:80"
     environment:
       - "APP_NAME=multichanneltodofront"
-      - "CONSUL_URL=consul0.westeurope.cloudapp.azure.com:8500"
+      - "CONSUL_URL=${MULTICHANNELTODO_CONSUL_URL}"
       - "constraint:node==consul0"
     networks:
       - front
