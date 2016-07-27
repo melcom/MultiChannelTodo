@@ -3,6 +3,14 @@
     padding-bottom: 20px;
 }
 
+.spinner {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    top: 75px;
+    left: 125px;
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
