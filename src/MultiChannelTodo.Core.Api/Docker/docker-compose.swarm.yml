@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+  mongo:
+    image: phgache/mymongo:latest
+    volumes:
+      - "/var/data"
+    restart: always
+    environment:
+      - "constraint:node!=consul0"
+    networks:
+      - back
+
+  multichanneltodo.api:
+    image: phgache/multichanneltodoapi:latest
+    expose:
+      - "5000"
+    environment:
+      - "constraint:container!=~api*"
+      - "constraint:node!=consul0"
+    networks:
+      - front
+      - back
+
+  lbapi:
+    image: phgache/haproxy:latest
+    ports:
+      - "${MULTICHANNELTODO_API_PORT}:80"
+    environment:
+      - "APP_NAME=multichanneltodoapi"
+      - "CONSUL_URL=${MULTICHANNELTODO_CONSUL_URL}"
+      - "constraint:node==consul0"
+    networks:
+      - front
+
+networks:
+  front:
+    driver: overlay
+  back:
+    driver: overlay

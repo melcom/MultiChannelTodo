@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MultiChannelTodo.Core.Api.Models;
 
 namespace MultiChannelTodo.Core.Api
 {
@@ -27,8 +28,13 @@ namespace MultiChannelTodo.Core.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             // Add framework services.
             services.AddMvc();
+
+            services.AddSwaggerGen();
+
+            services.AddSingleton<ITodoItemRepository, TodoItemRepository>(provider => new TodoItemRepository(Configuration["mongoconnection"], Configuration["database"]) );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,8 +42,14 @@ namespace MultiChannelTodo.Core.Api
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            app.UseStaticFiles();
 
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUi();
         }
     }
 }
