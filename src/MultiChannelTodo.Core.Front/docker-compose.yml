@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  multichanneltodo.core.front:
+    image: username/multichanneltodo.core.front
+    ports:
+      - "80:80"
