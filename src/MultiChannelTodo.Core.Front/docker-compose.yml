@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  multichanneltodo.core.front:
+    image: username/multichanneltodo.core.front
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
