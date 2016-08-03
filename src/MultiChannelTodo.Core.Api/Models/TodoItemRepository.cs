@@ -20,9 +20,19 @@ namespace MultiChannelTodo.Core.Api.Models
         public TodoItemRepository(string mongoConnection, string databaseName)
         {
             collectionName = "todoitems";
+
+            // Quick fix https://github.com/mongodb/mongo-csharp-driver/pull/243
+            var server = mongoConnection.Replace("mongodb://",string.Empty).Split(':');
+            string hostname = server[0];
+            string port = server.Length == 2 ? server[1] : "27017";
+            var ips = System.Net.Dns.GetHostAddressesAsync(hostname).Result;
+            mongoConnection = string.Format("mongodb://{0}:{1}", ips[0], port);
+            // End - Quick fix
+
             var client = new MongoClient(mongoConnection);
             this.database = client.GetDatabase(databaseName);
             this.collection = database.GetCollection<TodoItem>(collectionName);
+            
         }
 
         public async Task<TodoItem> GetTodoItem(ObjectId id)
