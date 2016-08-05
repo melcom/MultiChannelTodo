@@ -143,7 +143,7 @@ $launchURLPath = "api/todoitems"
 $ProjectName = $ProjectName -replace "[^a-zA-Z0-9]", ""
 
 # The name of the image created by the compose file
-$ImageName = "username/multichanneltodo.core.api"
+$ImageName = "phgache/multichanneltodoapi"
 
 # Calculate the name of the container created by the compose file
 $ContainerName = "${ProjectName}_multichanneltodo.core.api"
@@ -295,7 +295,7 @@ function OpenSite () {
 # Gets the Url of the remote container
 function GetUrl () {
     if ([System.String]::IsNullOrWhiteSpace($Machine)) {
-        $launchURL = [System.UriBuilder]"http://localhost"
+        $launchURL = [System.UriBuilder]"http://localhost:8080"
     }
     else {
         $launchURL = [System.UriBuilder]"http://$(docker-machine ip $Machine)"

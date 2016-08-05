@@ -225,3 +225,5 @@ FakesAssemblies/
 
 # Azure Deploy
 params.json
+
+project*

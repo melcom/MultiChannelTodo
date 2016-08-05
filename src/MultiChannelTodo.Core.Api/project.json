@@ -15,7 +15,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Swashbuckle": "6.0.0-beta901",
-    "RaisingStudio.MongoDB.Driver": "2.2.5",
+    "mongocsharpdriver": "2.3.0-beta1",
     "System.Runtime.Serialization.Formatters": "4.0.1-beta-24328-03",
     "System.Diagnostics.TraceSource": "4.0.0"
   },

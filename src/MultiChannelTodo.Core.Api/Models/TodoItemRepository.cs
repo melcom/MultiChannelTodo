@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -9,28 +10,22 @@ namespace MultiChannelTodo.Core.Api.Models
     {
         private readonly IMongoDatabase database;
         private IMongoCollection<TodoItem> collection;
-
         private readonly string collectionName;
-        private ITodoItemRepository _todoItemRepositoryImplementation;
 
-        public TodoItemRepository() : this("", "")
-        {
-        }
-
-        public TodoItemRepository(string mongoConnection, string databaseName)
+        public TodoItemRepository(IOptions<ConfigurationOptions> options)
         {
             collectionName = "todoitems";
 
             // Quick fix https://github.com/mongodb/mongo-csharp-driver/pull/243
-            var server = mongoConnection.Replace("mongodb://",string.Empty).Split(':');
+            var server = options.Value.MongoConnection.Replace("mongodb://",string.Empty).Split(':');
             string hostname = server[0];
             string port = server.Length == 2 ? server[1] : "27017";
             var ips = System.Net.Dns.GetHostAddressesAsync(hostname).Result;
-            mongoConnection = string.Format("mongodb://{0}:{1}", ips[0], port);
+            var mongoConnection = string.Format("mongodb://{0}:{1}", ips[0], port);
             // End - Quick fix
 
             var client = new MongoClient(mongoConnection);
-            this.database = client.GetDatabase(databaseName);
+            this.database = client.GetDatabase(options.Value.Database);
             this.collection = database.GetCollection<TodoItem>(collectionName);
             
         }

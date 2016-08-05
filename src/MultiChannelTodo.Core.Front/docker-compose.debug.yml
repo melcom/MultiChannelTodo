@@ -1,8 +1,23 @@
 version: '2'
 
 services:
+  mongo:
+    image: phgache/mymongo:latest
+    volumes:
+      - "/var/data"
+    restart: always
+  multichanneltodo.core.api:
+    depends_on:
+      - mongo
+    image: phgache/multichanneltodoapi:Debug
+    ports:
+      - "8080:80"
+    environment:
+      - REMOTE_DEBUGGING=0
+      - NetCore_MongoConnection=mongodb://mongo:27017
+      - NetCore_Database=multichanneltodo
   multichanneltodo.core.front:
-    image: username/multichanneltodo.core.front:Debug
+    image: phgache/multichanneltodofront:Debug
     build:
       context: .
       dockerfile: Dockerfile.debug
@@ -12,3 +27,6 @@ services:
       - "80:80"
     volumes:
       - .:/app
+    environment:
+      - NetCore_Env=Development
+      - NetCore_ApiPath=http://localhost:8080/api

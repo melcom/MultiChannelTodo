@@ -19,7 +19,7 @@ namespace MultiChannelTodo.Core.Api
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
+                .AddEnvironmentVariables("NetCore_");
             Configuration = builder.Build();
         }
 
@@ -34,7 +34,9 @@ namespace MultiChannelTodo.Core.Api
 
             services.AddSwaggerGen();
 
-            services.AddSingleton<ITodoItemRepository, TodoItemRepository>(provider => new TodoItemRepository(Configuration["mongoconnection"], Configuration["database"]) );
+            services.Configure<ConfigurationOptions>(Configuration);
+
+            services.AddSingleton<ITodoItemRepository, TodoItemRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

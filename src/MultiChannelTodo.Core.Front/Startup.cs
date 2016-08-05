@@ -14,7 +14,7 @@ namespace MultiChannelTodo.Core.Front
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", true, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
-                .AddEnvironmentVariables("DNX_");
+                .AddEnvironmentVariables("NetCore_");
             Configuration = builder.Build();
         }
 
