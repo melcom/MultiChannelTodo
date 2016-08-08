@@ -238,11 +238,11 @@ function ValidateVolumeMapping () {
 function Run () {
     $composeFilePath = GetComposeFilePath($pubPath)
 
-    $conflictingContainerIds = $(docker ps | select-string -pattern ":80->" | foreach { Write-Output $_.Line.split()[0] })
+    $conflictingContainerIds = $(docker ps | select-string -pattern ":->8080" | foreach { Write-Output $_.Line.split()[0] })
 
     if ($conflictingContainerIds) {
         $conflictingContainerIds = $conflictingContainerIds -Join ' '
-        Write-Host "Stopping conflicting containers using port 80"
+        Write-Host "Stopping conflicting containers using port 8080"
         $stopCommand = "docker stop $conflictingContainerIds"
         Write-Verbose "Executing: $stopCommand"
         Invoke-Expression "cmd /c $stopCommand `"2>&1`""
@@ -461,6 +461,10 @@ else {
     Write-Verbose "Setting: `$env:REMOTE_DEBUGGING = 0"
     $env:REMOTE_DEBUGGING = 0
 }
+
+# Configuration
+$env:NETCORE_MONGOCONNECTION = "mongodb://mongo:27017"
+$env:NETCORE_DATABASE = "multichanneltodo"
 
 # Call the correct functions for the parameters that were used
 if ($Clean) {

@@ -16,5 +16,5 @@ services:
     ports:
       - "8080:80"
     environment:
-      - NetCore_MongoConnection=mongodb://mongo:27017
-      - NetCore_Database=multichanneltodo
+      - NetCore_MongoConnection=${NETCORE_MONGOCONNECTION}
+      - NetCore_Database=${NETCORE_DATABASE}

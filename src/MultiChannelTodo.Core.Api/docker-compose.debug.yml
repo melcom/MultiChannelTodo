@@ -19,5 +19,5 @@ services:
       - .:/app
     environment:
       - REMOTE_DEBUGGING=${REMOTE_DEBUGGING}
-      - NetCore_MongoConnection=mongodb://mongo:27017
-      - NetCore_Database=multichanneltodo
+      - NetCore_MongoConnection=${NETCORE_MONGOCONNECTION}
+      - NetCore_Database=${NETCORE_DATABASE}

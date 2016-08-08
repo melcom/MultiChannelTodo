@@ -462,6 +462,10 @@ else {
     $env:REMOTE_DEBUGGING = 0
 }
 
+# Configuration
+$env:NETCORE_ENV = "Development"
+$env:NETCORE_APIPATH = "http://localhost:8080/api"
+
 # Call the correct functions for the parameters that were used
 if ($Clean) {
     Clean
