@@ -10,9 +10,6 @@ services:
     depends_on:
       - mongo
     image: phgache/multichanneltodoapi:Debug
-    build:
-      context: .
-      dockerfile: Dockerfile.debug
     ports:
       - "8080:80"
     volumes:
