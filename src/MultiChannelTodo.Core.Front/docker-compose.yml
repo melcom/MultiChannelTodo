@@ -3,6 +3,9 @@ version: '2'
 services:
   multichanneltodo.core.front:
     image: phgache/multichanneltodofront
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "80:80"
     environment:
