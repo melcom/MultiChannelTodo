@@ -465,6 +465,7 @@ else {
 # Configuration
 $env:NETCORE_ENV = "Development"
 $env:NETCORE_APIPATH = "http://localhost:8080/api"
+$env:ASPNETCORE_ENVIRONMENT = "Development"
 
 # Call the correct functions for the parameters that were used
 if ($Clean) {
