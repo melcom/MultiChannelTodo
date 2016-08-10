@@ -1,8 +1,0 @@
-﻿<parameters>
-  <parameter name="MultiChannelToDoContext"
-             description="MultiChannelToDoContext connection string"
-             defaultValue="None">
-    <parameterEntry kind="XmlFile" scope="Web.config"
-                    match="/configuration/connectionStrings/add[@name = 'MultiChannelToDoContext']/@connectionString" />
-  </parameter>
-</parameters>
