@@ -40,7 +40,7 @@ namespace MultiChannelTodo.Core.Api.Controllers
         [HttpGet("{id:length(24)}", Name = "GetByIdRoute")]
         public async Task<IActionResult> GetToDoItem(string id)
         {
-            var item = await todoItemRepository.GetTodoItem(new ObjectId(id));
+            var item = await todoItemRepository.GetTodoItem(id);
 
             return new ObjectResult(item);
         }
@@ -64,13 +64,30 @@ namespace MultiChannelTodo.Core.Api.Controllers
             }
         }
 
+        // COMPLETE 
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> CompleteDoItem(string id)
+        {
+            Trace.TraceInformation("Deleting item '{0}'", id);
+
+            var item = await todoItemRepository.GetTodoItem(id);
+
+            if(item != null)
+            {
+                item.Complete = true;
+                await todoItemRepository.UpdateTodoItem(item);
+                return new StatusCodeResult(200); // 200 Ok
+            }
+            return NotFound();
+        }
+
         // DELETE: api/ToDoItems/5
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> DeleteToDoItem(string id)
         {
             Trace.TraceInformation("Deleting item '{0}'", id);
 
-            if (await todoItemRepository.RemoveTodoItem(new ObjectId(id)))
+            if (await todoItemRepository.RemoveTodoItem(id))
             {
                 return new StatusCodeResult(204); // 204 No Content
             }

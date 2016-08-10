@@ -8,8 +8,8 @@ namespace MultiChannelTodo.Core.Api.Models
     {
         Task AddTodoItem(TodoItem todoItem);
         Task<IEnumerable<TodoItem>> GetAllTodoItems();
-        Task<TodoItem> GetTodoItem(ObjectId id);
-        Task<bool> RemoveTodoItem(ObjectId id);
+        Task<TodoItem> GetTodoItem(string id);
+        Task<bool> RemoveTodoItem(string id);
         Task UpdateTodoItem(TodoItem todoItem);
         Task Populate();
     }

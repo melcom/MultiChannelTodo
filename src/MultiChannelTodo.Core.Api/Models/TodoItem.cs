@@ -12,7 +12,8 @@ namespace MultiChannelTodo.Core.Api.Models
             UpdatedAt = DateTimeOffset.UtcNow;
         }
 
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         [BsonElement("text")]
         public string Text { get; set; }

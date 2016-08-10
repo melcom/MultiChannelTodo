@@ -30,7 +30,7 @@ namespace MultiChannelTodo.Core.Api.Models
             
         }
 
-        public async Task<TodoItem> GetTodoItem(ObjectId id)
+        public async Task<TodoItem> GetTodoItem(string id)
         {
             var query = Builders<TodoItem>.Filter.Eq(e => e.Id, id);
             var cursor = await this.collection.FindAsync(query);
@@ -69,7 +69,7 @@ namespace MultiChannelTodo.Core.Api.Models
         }
 
 
-        public async Task<bool> RemoveTodoItem(ObjectId id)
+        public async Task<bool> RemoveTodoItem(string id)
         {
             var query = Builders<TodoItem>.Filter.Eq(e => e.Id, id);
             await this.collection.DeleteOneAsync(query);
