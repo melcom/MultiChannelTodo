@@ -1,113 +1,140 @@
 ﻿@model MultiChannelTodo.Core.Front.Models.EnvModel
 
-<div  role="main" ng-app="multiChannelToDo">
+<div role="main" ng-app="multiChannelToDo">
 
-    <div class="jumbotron">
+    <div class="page-header">
         <h1>
             <span class="glyphicon glyphicon-list-alt"></span> To Do List
         </h1>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div ng-controller="ToDoController">
+    <div>
 
-                <img src="~/images/spinner.gif" class="spinner" ng-show="loading" />
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#items" aria-controls="item" role="tab" data-toggle="tab">Items</a></li>
+            <li role="presentation"><a href="#application" aria-controls="application" role="tab" data-toggle="tab">Application Environment</a></li>
+            <li role="presentation"><a href="#runtime" aria-controls="runtime" role="tab" data-toggle="tab">Runtime Environment</a></li>
+        </ul>
 
-                <div class="list-group">
-                    <button class="list-group-item" id="list-group-item-{{item.Id}}" ng-repeat="item in items" ng-hide="{{item.Complete}}" ng-click="complete(item)">{{item.Text}}</button>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="items">
+                <div class="panel-body">
+                    <div ng-controller="ToDoController">
+
+                        <img src="~/images/spinner.gif" class="spinner" ng-show="loading" />
+
+                        <ol class="list-group" ng-repeat="item in items">
+                            <li class="list-group-item">
+                                <div>
+                                    <span>
+                                        {{item.text}}
+                                    </span>
+                                    <div class="btn-group pull-right">
+                                        <button type="button" ng-click="remove(item)" class="btn btn-default glyphicon glyphicon-trash"></button>
+                                        <button type="button" ng-disabled="{{item.complete}}" ng-click="complete(item)" ng-class="{'btn-success glyphicon-check' : item.complete, 'btn-warning glyphicon-unchecked' : !item.complete}" class="btn glyphicon"></button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+
+                                <div class="navbar-header">
+                                    <span class="navbar-brand glyphicon glyphicon-menu-right"></span>
+                                </div>
+
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <button class="btn btn-default navbar-btn" ng-click="get()">Refresh</button>
+
+                                    <form ng-submit="add()" class="navbar-form navbar-left">
+                                        <div class="form-group">
+                                            <input type="text" ng-model="itemText" class="form-control" placeholder="New item">
+                                        </div>
+                                        <button class="btn btn-default" type="submit" id="submit">Add</button>
+                                    </form>
+
+                                    <div class="navbar-text navbar-right">@Model.Options.Env</div>
+                                </div>
+                            </div>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="application">
+
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Application Base Path</td>
+                                <td>@(Model.DefaultPlatformServices.Application.ApplicationBasePath)</td>
+                            </tr>
+                            <tr>
+                                <td>Application Name</td>
+                                <td>@(Model.DefaultPlatformServices.Application.ApplicationName)</td>
+                            </tr>
+                            <tr>
+                                <td>Application Version</td>
+                                <td>@(Model.DefaultPlatformServices.Application.ApplicationVersion)</td>
+                            </tr>
+                            <tr>
+                                <td>Runtime Framework</td>
+                                <td>@(Model.DefaultPlatformServices.Application.RuntimeFramework.FullName)</td>
+                            </tr>
+                            <tr>
+                                <td>Runtime Framework Version</td>
+                                <td>@(Model.DefaultPlatformServices.Application.RuntimeFramework.Version.ToString())</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <form ng-submit="add()">
-                    <div class="input-group">
-                        <input id="Text" ng-model="itemText" type="text" class="form-control" placeholder="Task" /><span class="input-group-addon" id="basic-addon2">Add</span>
-                    </div>
-                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="runtime">
+
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Framework Description</td>
+                                <td>@(Model.FrameworkDescription)</td>
+                            </tr>
+                            <tr>
+                                <td>OS Architecture</td>
+                                <td>@(Model.OsArchitecture)</td>
+                            </tr>
+                            <tr>
+                                <td>OS Description</td>
+                                <td>@(Model.OsDescription)</td>
+                            </tr>
+                            <tr>
+                                <td>Processor Architecture</td>
+                                <td>@(Model.ProcessArchitecture)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
-    </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Application Environment</h3>
-        </div>
-        <div class="panel-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Application Base Path</td>
-                        <td>@(Model.DefaultPlatformServices.Application.ApplicationBasePath)</td>
-                    </tr>
-                    <tr>
-                        <td>Application Name</td>
-                        <td>@(Model.DefaultPlatformServices.Application.ApplicationName)</td>
-                    </tr>
-                    <tr>
-                        <td>Application Version</td>
-                        <td>@(Model.DefaultPlatformServices.Application.ApplicationVersion)</td>
-                    </tr>
-                    <tr>
-                        <td>Runtime Framework</td>
-                        <td>@(Model.DefaultPlatformServices.Application.RuntimeFramework.FullName)</td>
-                    </tr>
-                    <tr>
-                        <td>Runtime Framework Version</td>
-                        <td>@(Model.DefaultPlatformServices.Application.RuntimeFramework.Version.ToString())</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Runtime Environment</h3>
-        </div>
-        <div class="panel-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                    <tbody>
-                        <tr>
-                            <td>Framework Description</td>
-                            <td>@(Model.FrameworkDescription)</td>
-                        </tr>
-                        <tr>
-                            <td>OS Architecture</td>
-                            <td>@(Model.OsArchitecture)</td>
-                        </tr>
-                        <tr>
-                            <td>OS Description</td>
-                            <td>@(Model.OsDescription)</td>
-                        </tr>
-                        <tr>
-                            <td>Processor Architecture</td>
-                            <td>@(Model.ProcessArchitecture)</td>
-                        </tr>
-                    </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Environment</h3>
-        </div>
-        <div class="panel-body">
-            @Model.Options.Env
-        </div>
-    </div>
-
 </div>
 @section scripts
 {

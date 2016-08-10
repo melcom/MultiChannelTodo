@@ -12,7 +12,11 @@ multiChannelToDoApp
             },
 
             complete: function (item) {
-                return $http.put(apiPath + '/ToDoItems/' + item.Id, { "Id": item.Id, "Text": item.Text, "Complete": true });
-            }
+                return $http.put(apiPath + '/ToDoItems/' + item.id);
+            },
+
+            remove: function (item) {
+            return $http.delete(apiPath + '/ToDoItems/' + item.id);
+        }
         }
     }]);

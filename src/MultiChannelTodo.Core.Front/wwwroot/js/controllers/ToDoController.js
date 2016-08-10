@@ -35,6 +35,13 @@ multiChannelToDoApp
                 });
         };
 
+        $scope.remove = function (item) {
+            toDoService.remove(item)
+                .success(function (data) {
+                    $scope.get();
+                });
+        };
+
         $scope.get();
 
     }]);
