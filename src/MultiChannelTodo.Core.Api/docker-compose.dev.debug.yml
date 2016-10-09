@@ -15,3 +15,6 @@ services:
       - ~/.nuget/packages:/root/.nuget/packages:ro
       - ~/clrdbg:/clrdbg:ro
     entrypoint: tail -f /dev/null
+    environment:
+      - NetCore_MongoConnection=mongodb://mongo:27017
+      - NetCore_Database=multichanneltodo
