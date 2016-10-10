@@ -2,9 +2,12 @@ version: '2'
 
 services:
   multichanneltodo.core.front:
-    image: user/multichanneltodo.core.front${TAG}
+    image: phgache/multichanneltodo.core.front${TAG}
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "80"
+    environment:
+      - NetCore_Env=${NETCORE_ENV}
+      - NetCore_ApiPath=${NETCORE_APIPATH}

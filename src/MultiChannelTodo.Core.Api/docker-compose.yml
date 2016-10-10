@@ -7,7 +7,7 @@ services:
       - "/var/data"
     restart: always
   multichanneltodo.core.api:
-    image: user/multichanneltodo.core.api${TAG}
+    image: phgache/multichanneltodo.core.api${TAG}
     build:
       context: .
       dockerfile: Dockerfile

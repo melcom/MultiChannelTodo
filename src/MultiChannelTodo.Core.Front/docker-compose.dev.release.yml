@@ -7,3 +7,6 @@ services:
     volumes:
       - ~/clrdbg:/clrdbg:ro
     entrypoint: tail -f /dev/null
+    environment:
+      - NetCore_Env=Development
+      - NetCore_ApiPath=http://localhost:32778/api

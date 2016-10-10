@@ -10,6 +10,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NetCore_Env=Development
+      - NetCore_ApiPath=http://localhost:32785/api
     volumes:
       - .:/app
       - ~/.nuget/packages:/root/.nuget/packages:ro

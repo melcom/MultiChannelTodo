@@ -10,11 +10,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NetCore_MongoConnection=mongodb://mongo:27017
+      - NetCore_Database=multichanneltodo
     volumes:
       - .:/app
       - ~/.nuget/packages:/root/.nuget/packages:ro
       - ~/clrdbg:/clrdbg:ro
     entrypoint: tail -f /dev/null
-    environment:
-      - NetCore_MongoConnection=mongodb://mongo:27017
-      - NetCore_Database=multichanneltodo
