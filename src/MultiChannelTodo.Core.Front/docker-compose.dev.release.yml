@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  multichanneltodo.core.front:
+  multichanneltodofront:
     labels:
       - "com.microsoft.visualstudio.targetoperatingsystem=linux"
     volumes:

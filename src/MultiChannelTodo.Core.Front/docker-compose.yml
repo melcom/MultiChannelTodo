@@ -1,8 +1,8 @@
 version: '2'
 
 services:
-  multichanneltodo.core.front:
-    image: phgache/multichanneltodo.core.front${TAG}
+  multichanneltodofront:
+    image: phgache/multichanneltodofront${TAG}
     build:
       context: .
       dockerfile: Dockerfile
